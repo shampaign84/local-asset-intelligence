@@ -52,16 +52,13 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-ink-950 text-[#f4f4f2]">
-      {/* Full-screen luxury reference image, proportionally covering the whole viewport */}
+      {/* Full-screen reference image at original colors, proportionally covering the whole viewport */}
       <div
-        className="pointer-events-none fixed inset-0 bg-cover bg-center opacity-[0.30]"
-        style={{ backgroundImage: "url(/images/luxury-bg.png)" }}
+        className="pointer-events-none fixed inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url(/images/city-bg.jpg)" }}
       />
-      {/* Even, low-density dark wash so the image reads across the entire screen while keeping text legible */}
-      <div className="pointer-events-none fixed inset-0 bg-ink-950/55" />
-      {/* Subtle right-side reinforcement only behind the chat column for bubble legibility */}
-      <div className="pointer-events-none fixed inset-0 bg-gradient-to-l from-ink-950/60 via-transparent to-transparent" />
-      <div className="pointer-events-none fixed inset-0 bg-grid-lines opacity-30" />
+      {/* Faint scrim only behind the chat column so the dark bubbles keep contrast without tinting the image */}
+      <div className="pointer-events-none fixed inset-0 bg-gradient-to-l from-ink-950/45 via-ink-950/5 to-transparent" />
       <div className="relative">
         <Header />
         {/* Chat column shifted to the right */}
