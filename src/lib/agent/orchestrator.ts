@@ -6,11 +6,13 @@
  *           근거 부족 시 답변 거부(원칙 E), tool 호출 audit 기록(§18.3).
  */
 import { getDb } from "../db";
+import { config } from "../config";
 import { getLLM } from "../llm/provider";
 import { hybridSearch, type RetrievedChunk } from "../rag/retriever";
 import * as sql from "./tools/sqlTool";
 import { computeTrust, freshnessFromMonths, type TrustInput } from "../trust/score";
-import { classifyIntent, resolveZone, zoneName } from "./router";
+import { classifyIntent, resolveZone, zoneName, detectOutOfScopeRegion } from "./router";
+import { ZONES } from "../../data/reference";
 import type { ChatResponse, Evidence, Intent, ToolLog } from "../types";
 
 const LATEST_DATA_PERIOD = "2026-08"; // 시딩 최신 시점 (현재일 2026-08-31 기준 신선도 ≈ 1.0)
@@ -67,6 +69,11 @@ interface BranchResult {
 
 // ---------------- 시나리오 A: 상권 쇠퇴 예측 ----------------
 async function branchPrediction(question: string, zone: string | null, logs: ToolLog[]): Promise<BranchResult> {
+  // zone 미해석 + 마포구 외 지역명이 명시적으로 등장 → 조용히 마포구 데이터로 대체하지 않고 범위 안내(원칙 E)
+  if (!zone) {
+    const oos = detectOutOfScopeRegion(question);
+    if (oos) return outOfScope(oos);
+  }
   const ranking = await timed(logs, "sql:zoneRiskRanking", () => sql.zoneRiskRanking());
   if (ranking.length === 0) return insufficient();
   const target = (zone && ranking.find((r) => r.zone_id === zone)) || ranking[0];
@@ -181,6 +188,8 @@ async function branchDocument(question: string, logs: ToolLog[]): Promise<Branch
 // ---------------- 정형 데이터 ----------------
 async function branchStructured(question: string, zone: string | null, logs: ToolLog[]): Promise<BranchResult> {
   if (!zone) {
+    const oos = detectOutOfScopeRegion(question);
+    if (oos) return outOfScope(oos);
     return {
       draft: `## 확인 필요\n어느 상권(예: 홍대·합정, 연남동, 망원동, 공덕역, 상암 DMC, 대흥·이대)에 대한 질문인지 알려주시면 정확한 수치를 조회하겠습니다.`,
       evidence: [],
@@ -309,6 +318,22 @@ async function timed<T>(logs: ToolLog[], tool: string, fn: () => Promise<T>): Pr
     logs.push({ tool, input: null, ok: false, latency_ms: Date.now() - s, summary: (e as Error).message });
     throw e;
   }
+}
+
+function outOfScope(regionName: string): BranchResult {
+  const supported = ZONES.map((z) => z.name).join(", ");
+  return {
+    draft: [
+      `## 지원 범위 안내`,
+      `이 프로토타입은 **${config.region.name}**만 대상으로 구축되어 있어, **${regionName}**에 대한 데이터는 보유하고 있지 않습니다.`,
+      ``,
+      `현재 지원 상권: ${supported}`,
+    ].join("\n"),
+    evidence: [],
+    trust: baseInsufficientTrust(),
+    toolsUsed: [],
+    abstained: true,
+  };
 }
 
 function insufficient(): BranchResult {

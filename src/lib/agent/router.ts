@@ -23,6 +23,33 @@ export function zoneName(zoneId: string): string {
   return ZONES.find((z) => z.zone_id === zoneId)?.name ?? zoneId;
 }
 
+/**
+ * 마포구 외 지역명 감지 (범위 밖 질문 안내용).
+ *
+ * ⚠️ 일반 정규식("OO구/OO시" 패턴)은 쓰지 않는다 — "유동인구"("~인구"),
+ * "위험도"("~험도") 같은 도메인 용어 자체가 오탐지되기 때문이다.
+ * 대신 실제 지역명 화이트리스트로만 명시적 매칭한다(오탐 최소화).
+ */
+const OTHER_SEOUL_GU = [
+  "종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구", "성북구",
+  "강북구", "도봉구", "노원구", "은평구", "서대문구", "양천구", "강서구", "구로구",
+  "금천구", "영등포구", "동작구", "관악구", "서초구", "강남구", "송파구", "강동구",
+];
+const OTHER_MAJOR_REGIONS = [
+  "부산", "대구", "인천", "광주", "대전", "울산", "세종",
+  "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도",
+  "경상북도", "경상남도", "제주도", "제주특별자치도",
+  "수원", "성남", "고양", "용인", "부천", "안산", "안양", "화성", "평택",
+];
+const OUT_OF_SCOPE_REGIONS = [...OTHER_SEOUL_GU, ...OTHER_MAJOR_REGIONS];
+
+export function detectOutOfScopeRegion(text: string): string | null {
+  for (const r of OUT_OF_SCOPE_REGIONS) {
+    if (text.includes(r)) return r;
+  }
+  return null;
+}
+
 const RULES: { intent: Intent; re: RegExp }[] = [
   { intent: "prediction", re: /(예측|전망|향후|앞으로|리스크|위험|쇠퇴|공실\s*가능|경보|몇\s*개월|개월\s*뒤|미래)/ },
   { intent: "asset_valuation", re: /(추정가|자산\s*가치|감정|가치평가|시세)/ },
