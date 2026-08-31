@@ -32,9 +32,15 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# local data & pglite cache
+/data/raw/*
+!/data/raw/.gitkeep
+/.pglite-dev
 
 # typescript
 *.tsbuildinfo
