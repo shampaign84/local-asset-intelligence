@@ -51,7 +51,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <div className="min-h-screen text-slate-800">
       <Header />
       <main className="mx-auto max-w-3xl px-4 pb-40 pt-6">
         {messages.length === 0 && <Welcome onPick={send} />}

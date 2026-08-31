@@ -3,7 +3,17 @@
 
 html,
 body {
-  background: #f8fafc; /* slate-50 */
   color: #1e293b; /* slate-800 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", "맑은 고딕", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  background-color: #f8fafc; /* slate-50 fallback */
+  background-image: linear-gradient(180deg, rgba(248, 250, 252, 0.86), rgba(248, 250, 252, 0.93)),
+    url("/images/nyc-skyline-bg.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
