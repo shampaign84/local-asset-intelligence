@@ -92,19 +92,13 @@ function Header() {
 }
 
 function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="hidden rounded-full bg-white/10 px-2 py-1 font-medium text-slate-200 sm:inline">{children}</span>;
+  return <span className="hidden rounded-full bg-slate-100 px-2 py-1 font-medium text-slate-600 sm:inline">{children}</span>;
 }
 
 function Welcome({ onPick }: { onPick: (q: string) => void }) {
   return (
     <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black p-6 shadow-xl shadow-black/40 sm:p-8">
-      {/* reference image, cropped to the card's own aspect ratio, at 10% white translucency */}
-      <img
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/freepik_Luxury%20real%20estate%20invitation%20template_1-default-ujVjYQ69ZAb9CnMtdzhsIyvHskvVa8.png"
-        alt=""
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-10"
-      />
-      {/* dark wash to keep text legible over the image */}
+      {/* dark wash for text legibility */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neutral-950/70 via-neutral-950/60 to-black/80" />
       {/* thin grid rule lines, echoing the reference card */}
       <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -177,7 +171,7 @@ function AssistantBubble({ msg }: { msg: Msg }) {
 }
 
 const INTENT_LABEL: Record<string, string> = {
-  prediction: "예��",
+  prediction: "예측",
   document_search: "문서검색",
   structured_data: "정형데이터",
   analytics: "분석",
@@ -224,7 +218,7 @@ function TrustRow({ k, v }: { k: string; v: number }) {
 
 function EvidenceList({ evidence }: { evidence: Evidence[] }) {
   const [open, setOpen] = useState(false);
-  const icon = { sql: "🗄️", document: "📑", prediction: "����������" } as Record<string, string>;
+  const icon = { sql: "🗄️", document: "📑", prediction: "📈" } as Record<string, string>;
   return (
     <div className="mt-3 border-t border-slate-100 pt-2">
       <button onClick={() => setOpen((o) => !o)} className="text-xs font-semibold text-indigo-600 hover:underline">
@@ -268,7 +262,7 @@ function Thinking() {
         <span className="inline-flex gap-1">
           <Dot /> <Dot d="0.15s" /> <Dot d="0.3s" />
         </span>{" "}
-        근거 검색 및 분석 중��
+        근거 검색 및 분석 중…
       </div>
     </div>
   );
