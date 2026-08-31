@@ -70,19 +70,19 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-10 border-b border-white/10 bg-black/90 backdrop-blur">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-indigo-700">Local Asset Intelligence</span>
-            <span className="rounded bg-indigo-50 px-1.5 py-0.5 text-[10px] font-semibold text-indigo-600">MAPO · PROTOTYPE</span>
+            <span className="text-lg font-bold text-indigo-300">Local Asset Intelligence</span>
+            <span className="rounded bg-indigo-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-indigo-300">MAPO · PROTOTYPE</span>
           </div>
-          <p className="text-xs text-slate-500">지자체 자산가치·상권 예측 On-premise RAG 챗봇</p>
+          <p className="text-xs text-slate-300">지자체 자산가치·상권 예측 On-premise RAG 챗봇</p>
         </div>
         <div className="flex items-center gap-3 text-xs">
           <Badge>🔒 On-premise</Badge>
           <Badge>📑 근거·신뢰도</Badge>
-          <Link href="/admin" className="rounded-md border border-slate-300 px-2.5 py-1 font-medium text-slate-600 hover:bg-slate-100">
+          <Link href="/admin" className="rounded-md border border-white/20 px-2.5 py-1 font-medium text-slate-200 hover:bg-white/10">
             관리자
           </Link>
         </div>
@@ -92,7 +92,7 @@ function Header() {
 }
 
 function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="hidden rounded-full bg-slate-100 px-2 py-1 font-medium text-slate-600 sm:inline">{children}</span>;
+  return <span className="hidden rounded-full bg-white/10 px-2 py-1 font-medium text-slate-200 sm:inline">{children}</span>;
 }
 
 function Welcome({ onPick }: { onPick: (q: string) => void }) {
@@ -260,9 +260,9 @@ function Composer({
   loading: boolean;
 }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white/90 backdrop-blur">
+    <div className="fixed inset-x-0 bottom-0 border-t border-white/10 bg-black/90 backdrop-blur">
       <div className="mx-auto max-w-3xl px-4 py-3">
-        <div className="flex items-end gap-2 rounded-2xl border border-slate-300 bg-white px-3 py-2 shadow-sm focus-within:border-indigo-400">
+        <div className="flex items-end gap-2 rounded-2xl border border-white/20 bg-white/5 px-3 py-2 shadow-sm focus-within:border-indigo-400">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -274,7 +274,7 @@ function Composer({
             }}
             rows={1}
             placeholder="마포구 상권/조례에 대해 질문하세요 (예: 홍대 상권 쇠퇴 위험은?)"
-            className="max-h-32 flex-1 resize-none bg-transparent text-sm outline-none placeholder:text-slate-400"
+            className="max-h-32 flex-1 resize-none bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
           />
           <button
             onClick={onSend}
