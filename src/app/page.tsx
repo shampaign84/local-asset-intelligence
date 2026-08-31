@@ -55,14 +55,14 @@ export default function Home() {
       {/* Full-screen reference image at original colors, proportionally covering the whole viewport */}
       <div
         className="pointer-events-none fixed inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url(/images/city-bg.jpg)" }}
+        style={{ backgroundImage: "url(/images/luxury-invite.png)" }}
       />
       {/* Faint scrim only behind the chat column so the dark bubbles keep contrast without tinting the image */}
-      <div className="pointer-events-none fixed inset-0 bg-gradient-to-l from-ink-950/45 via-ink-950/5 to-transparent" />
+      <div className="pointer-events-none fixed inset-0 bg-gradient-to-r from-ink-950/45 via-ink-950/5 to-transparent" />
       <div className="relative">
         <Header />
-        {/* Chat column shifted to the right */}
-        <main className="ml-auto w-full max-w-2xl px-4 pb-40 pt-6 lg:mr-[6vw]">
+        {/* Chat column shifted to the left */}
+        <main className="mr-auto w-full max-w-2xl px-4 pb-40 pt-6 lg:ml-[6vw]">
           {messages.length === 0 && <Welcome onPick={send} />}
           <div className="space-y-5">
             {messages.map((m, i) =>
