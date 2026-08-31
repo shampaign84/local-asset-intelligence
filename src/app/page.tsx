@@ -100,7 +100,7 @@ function Welcome({ onPick }: { onPick: (q: string) => void }) {
     <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black p-6 shadow-xl shadow-black/40 sm:p-8">
       {/* reference image, cropped to the card's own aspect ratio, at 50% opacity */}
       <img
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black.png-gWNBOD2rxIHJyJGfDjp9gtLixE3UrC.jpeg"
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/freepik_Luxury%20real%20estate%20invitation%20template_1-default-ChjdQKa23uFeRt5L726GVSUu5wwRcE.png"
         alt=""
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-50"
       />
