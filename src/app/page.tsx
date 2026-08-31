@@ -98,6 +98,14 @@ function Badge({ children }: { children: React.ReactNode }) {
 function Welcome({ onPick }: { onPick: (q: string) => void }) {
   return (
     <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black p-6 shadow-xl shadow-black/40 sm:p-8">
+      {/* reference image, cropped to the card's own aspect ratio, at 50% opacity */}
+      <img
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/black.png-gWNBOD2rxIHJyJGfDjp9gtLixE3UrC.jpeg"
+        alt=""
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-50"
+      />
+      {/* dark wash to keep text legible over the image */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neutral-950/70 via-neutral-950/60 to-black/80" />
       {/* thin grid rule lines, echoing the reference card */}
       <div className="pointer-events-none absolute inset-0 opacity-40">
         <div className="absolute left-6 top-0 h-full w-px bg-white/10" />
