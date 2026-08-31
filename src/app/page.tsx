@@ -116,7 +116,7 @@ function Welcome({ onPick }: { onPick: (q: string) => void }) {
     <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-ink-900">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-40"
-        style={{ backgroundImage: "url(/images/facade-hero.png)" }}
+        style={{ backgroundImage: "url(/images/luxury-bg.png)" }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink-950/40 via-ink-950/85 to-ink-950" />
       <div className="relative p-6">
