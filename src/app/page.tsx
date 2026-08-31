@@ -97,21 +97,42 @@ function Badge({ children }: { children: React.ReactNode }) {
 
 function Welcome({ onPick }: { onPick: (q: string) => void }) {
   return (
-    <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-xl font-bold text-slate-800">무엇을 분석해 드릴까요?</h1>
-      <p className="mt-1 text-sm text-slate-500">
-        마포구 상권의 <b>쇠퇴 위험도</b>, <b>공실·폐업 추이</b>, <b>관련 조례</b>를 근거·신뢰도와 함께 답합니다.
-      </p>
-      <div className="mt-4 grid gap-2 sm:grid-cols-2">
-        {SAMPLES.map((s) => (
-          <button
-            key={s}
-            onClick={() => onPick(s)}
-            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-left text-sm text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50"
-          >
-            {s}
-          </button>
-        ))}
+    <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black p-6 shadow-xl shadow-black/40 sm:p-8">
+      {/* thin grid rule lines, echoing the reference card */}
+      <div className="pointer-events-none absolute inset-0 opacity-40">
+        <div className="absolute left-6 top-0 h-full w-px bg-white/10" />
+        <div className="absolute left-0 top-16 h-px w-full bg-white/10" />
+        <div className="absolute left-0 top-1/2 h-px w-full bg-white/10" />
+      </div>
+      {/* gold accent line */}
+      <div className="absolute left-1/2 right-6 top-16 h-px bg-gradient-to-r from-amber-400/80 to-amber-500/40" />
+      {/* vertical gold tick */}
+      <div className="absolute left-6 top-24 h-16 w-px bg-amber-400/70" />
+
+      <div className="relative">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-400/90">Mapo District</span>
+        <h1 className="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">무엇을 분석해 드릴까요?</h1>
+        <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-400">
+          마포구 상권의 <b className="text-neutral-200">쇠퇴 위험도</b>, <b className="text-neutral-200">공실·폐업 추이</b>,{" "}
+          <b className="text-neutral-200">관련 조례</b>를 근거·신뢰도와 함께 답합니다.
+        </p>
+
+        <div className="mt-6 grid gap-2 sm:grid-cols-2">
+          {SAMPLES.map((s) => (
+            <button
+              key={s}
+              onClick={() => onPick(s)}
+              className="rounded-xl border border-white/10 bg-white/[.04] px-3 py-2.5 text-left text-sm text-neutral-200 backdrop-blur-sm transition hover:border-amber-400/50 hover:bg-white/[.08]"
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-3 text-[10px] font-medium text-neutral-500">
+          <span>On-premise RAG · 근거 기반 답변</span>
+          <span className="font-mono tracking-wide text-neutral-400">local-asset-intel</span>
+        </div>
       </div>
     </div>
   );
@@ -239,7 +260,7 @@ function Thinking() {
         <span className="inline-flex gap-1">
           <Dot /> <Dot d="0.15s" /> <Dot d="0.3s" />
         </span>{" "}
-        근거 검색 및 분석 중…
+        근거 검색 및 분석 중��
       </div>
     </div>
   );
