@@ -155,6 +155,11 @@ async function branchPrediction(question: string, zone: string | null, logs: Too
 
 // ---------------- 문서 검색 ----------------
 async function branchDocument(question: string, logs: ToolLog[]): Promise<BranchResult> {
+  // 마포구 외 지역명이 명시되면, 내용이 비슷해 보여도(예: "상권 활성화 조례") 검색 없이 범위 안내
+  // — RAG 코퍼스가 전부 마포구 조례라 지역명만 다르고 문구가 겹치면 오매칭될 수 있음(원칙 E).
+  const oos = detectOutOfScopeRegion(question);
+  if (oos) return outOfScope(oos);
+
   const docs = await timed(logs, "vector:hybridSearch", () => hybridSearch(question, 4));
   const top = docs[0];
   // 근거 부족 → 답변 거부 (원칙 E)
