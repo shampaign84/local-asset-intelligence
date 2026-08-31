@@ -52,10 +52,17 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-ink-950 text-[#f4f4f2]">
-      <div className="pointer-events-none fixed inset-0 bg-grid-lines opacity-60" />
+      {/* Full-screen luxury reference image, proportionally covered at low opacity */}
+      <div
+        className="pointer-events-none fixed inset-0 bg-cover bg-center opacity-[0.14]"
+        style={{ backgroundImage: "url(/images/luxury-bg.png)" }}
+      />
+      <div className="pointer-events-none fixed inset-0 bg-gradient-to-r from-ink-950 via-ink-950/70 to-ink-950/30" />
+      <div className="pointer-events-none fixed inset-0 bg-grid-lines opacity-40" />
       <div className="relative">
         <Header />
-        <main className="mx-auto max-w-3xl px-4 pb-40 pt-6">
+        {/* Chat column shifted to the right */}
+        <main className="ml-auto w-full max-w-2xl px-4 pb-40 pt-6 lg:mr-[6vw]">
           {messages.length === 0 && <Welcome onPick={send} />}
           <div className="space-y-5">
             {messages.map((m, i) =>
