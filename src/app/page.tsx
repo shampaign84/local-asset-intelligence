@@ -70,7 +70,7 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/60 backdrop-blur">
+    <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/10 backdrop-blur">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
         <div>
           <div className="flex items-center gap-2">
@@ -195,7 +195,7 @@ function TrustRow({ k, v }: { k: string; v: number }) {
 
 function EvidenceList({ evidence }: { evidence: Evidence[] }) {
   const [open, setOpen] = useState(false);
-  const icon = { sql: "🗄️", document: "📑", prediction: "����" } as Record<string, string>;
+  const icon = { sql: "🗄️", document: "📑", prediction: "������" } as Record<string, string>;
   return (
     <div className="mt-3 border-t border-slate-100 pt-2">
       <button onClick={() => setOpen((o) => !o)} className="text-xs font-semibold text-indigo-600 hover:underline">
@@ -260,7 +260,7 @@ function Composer({
   loading: boolean;
 }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white/60 backdrop-blur">
+    <div className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white/10 backdrop-blur">
       <div className="mx-auto max-w-3xl px-4 py-3">
         <div className="flex items-end gap-2 rounded-2xl border border-slate-300 bg-white px-3 py-2 shadow-sm focus-within:border-indigo-400">
           <textarea
