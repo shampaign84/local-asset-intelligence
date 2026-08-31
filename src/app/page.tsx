@@ -113,12 +113,7 @@ function Badge({ children }: { children: React.ReactNode }) {
 
 function Welcome({ onPick }: { onPick: (q: string) => void }) {
   return (
-    <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-ink-900">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
-        style={{ backgroundImage: "url(/images/luxury-bg.png)" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink-950/40 via-ink-950/85 to-ink-950" />
+    <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-ink-900/60 backdrop-blur-sm">
       <div className="relative p-6">
         <div className="mb-3 h-px w-16 bg-gradient-to-r from-gold-500 to-transparent" />
         <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-400">
@@ -187,7 +182,7 @@ const INTENT_LABEL: Record<string, string> = {
   document_search: "문서검색",
   structured_data: "정형데이터",
   analytics: "분석",
-  asset_valuation: "자산가치",
+  asset_valuation: "자산���치",
   mixed: "복합",
 };
 
